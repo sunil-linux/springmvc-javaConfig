@@ -1,0 +1,26 @@
+<project name="springmvc-javaConfig">
+	<target name="build" depends="clean">
+		<javac destdir="build" srcdir="src">
+			<classpath refid="compile.classpath">
+			</classpath>
+		</javac>
+		<war destfile="dist/users.war" needxmlfile='false'>
+			<zipfileset dir="war/WEB-INF/views" prefix="WEB-INF/views" includes="**/*.*"/>		
+			<zipfileset dir="war" includes="*.html,*.png"/>				
+			<zipfileset dir="src" prefix="WEB-INF/classes" includes="**/*.properties" />
+			<zipfileset dir="war/WEB-INF/lib" prefix="WEB-INF/lib" includes="**/*.jar"></zipfileset>
+			<classes dir="build" includes="com/agilent/**"></classes>
+		</war>
+	</target>
+
+	<path id="compile.classpath">
+		<fileset dir="war/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean" description="Deletes Existing war file">
+			<delete file="dist/users.war" />
+	</target>
+	
+</project>
